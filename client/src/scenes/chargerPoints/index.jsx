@@ -72,7 +72,7 @@ const ChargerPoints = () => {
 
   useEffect(() => {
     //const sse = new EventSource('http://192.168.0.6:3000/ocpp/chargerPoints/status')
-    const sse = new EventSource('http://localhost:3030/ocpp/chargerPoints/status')
+    const sse = new EventSource('http://134.209.118.100/:3030/ocpp/chargerPoints/status')
     sse.onmessage = (e) => getRealtimeData(JSON.parse(e.data));
     sse.onerror = () => {
         console.log('Error');
