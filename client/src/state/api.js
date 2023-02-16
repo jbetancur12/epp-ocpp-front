@@ -13,6 +13,7 @@ export const api = createApi({
     "Admins",
     "Performance",
     "Dashboard",
+    "ChargerPoints"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -55,6 +56,52 @@ export const api = createApi({
       query: () => "general/dashboard",
       providesTags: ["Dashboard"],
     }),
+
+    //
+    getChargerPoints: build.query({
+        query: () => "/ocpp/chargerPoints",
+        providesTags: ["ChargerPoints"],
+      }),
+    addNewChargerStation: build.mutation({
+        query: (payload) => ({
+            url: '/ocpp/chargerPoints',
+            method: 'POST',
+            body: payload,
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+          }),
+          invalidatesTags: ['ChargerPoints'],
+    }),
+    deleteChargerStation: build.mutation({
+        query: (id) => ({
+            url: `/ocpp/chargerPoints/${id}`,
+            method: 'DELETE',
+        }),
+        invalidatesTags : ['ChargerPoints']
+    }),
+    startRemoteChargerStation: build.mutation({
+        query: (payload) => ({
+            url: `/ocpp/chargerPoints/start/63d9d8e1d542c2165196f2c4`,
+            method: 'POST',
+            body: payload,
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+        }),
+        invalidatesTags : ['ChargerPoints']
+    }),
+    stopRemoteChargerStation: build.mutation({
+        query: (payload) => ({
+            url: `/ocpp/chargerPoints/stop`,
+            method: 'POST',
+            body: payload,
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+        }),
+        invalidatesTags : ['ChargerPoints']
+    })
   }),
 });
 
@@ -68,4 +115,9 @@ export const {
   useGetAdminsQuery,
   useGetUserPerformanceQuery,
   useGetDashboardQuery,
+  useGetChargerPointsQuery,
+  useAddNewChargerStationMutation,
+  useDeleteChargerStationMutation,
+  useStartRemoteChargerStationMutation,
+  useStopRemoteChargerStationMutation
 } = api;

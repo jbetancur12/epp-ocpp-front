@@ -27,6 +27,7 @@ import {
   AdminPanelSettingsOutlined,
   TrendingUpOutlined,
   PieChartOutlined,
+  ChargingStation,
 } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -37,6 +38,10 @@ const navItems = [
   {
     text: "Dashboard",
     icon: <HomeOutlined />,
+  },
+  {
+    text: "Charger Stations",
+    icon: <ChargingStation/>,
   },
   {
     text: "Client Facing",
@@ -91,6 +96,11 @@ const navItems = [
     icon: <TrendingUpOutlined />,
   },
 ];
+
+const kebabCase = string => string
+.replace(/([a-z])([A-Z])/g, "$1-$2")
+.replace(/[\s_]+/g, '-')
+.toLowerCase();
 
 const Sidebar = ({
   user,
@@ -151,7 +161,7 @@ const Sidebar = ({
                     </Typography>
                   );
                 }
-                const lcText = text.toLowerCase();
+                const lcText = kebabCase(text);
 
                 return (
                   <ListItem key={text} disablePadding>
