@@ -82,7 +82,7 @@ export const api = createApi({
     }),
     startRemoteChargerStation: build.mutation({
         query: (payload) => ({
-            url: `/ocpp/chargerPoints/start/63eeae95e568bd12fcf7160b`,
+            url: `/ocpp/chargerPoints/start/64107f2e147b550a5bc8d48c`,
             method: 'POST',
             body: payload,
             headers: {
